@@ -24,7 +24,7 @@ When a potential client fills out the intake form, LeadFlow:
 | Styling | Tailwind CSS v4 + shadcn/ui |
 | Forms | React Hook Form + Yup |
 | Database | Supabase (PostgreSQL) |
-| AI | Google Gemini API |
+| AI | GROQ AI API |
 | Fonts | Playfair Display + DM Sans |
 
 ---
@@ -36,7 +36,7 @@ app/
   page.tsx              # Intake form page (/)
   dashboard/page.tsx    # Leads dashboard (/dashboard)
   api/
-    categorize/         # POST — AI categorization via Gemini
+    categorize/         # POST — AI categorization via GROQ
     submit/             # POST — validated insert into Supabase
   globals.css           # Tailwind theme, fonts, animations
 
@@ -48,7 +48,7 @@ components/
     shared/Card.tsx             # Page wrapper card
 
 schemas/
-  lead.ts               # Yup schemas: LeadSubmission, GeminiResponse, LeadRecord
+  lead.ts               # Yup schemas: LeadSubmission, GROQResponse, LeadRecord
 
 lib/
   supabase.ts           # Supabase admin client
@@ -62,7 +62,7 @@ lib/
 Client submits form
       │
       ▼
-POST /api/categorize  →  Gemini API  →  { summary, category }
+POST /api/categorize  →  GROQ API  →  { summary, category }
       │
       ▼
 POST /api/submit  →  Supabase insert (lead + AI fields)
@@ -82,8 +82,8 @@ router.refresh()  →  Dashboard re-fetches leads server-side
 | `business_name` | string | Form |
 | `industry` | string | Form (select) |
 | `message` | string | Form |
-| `ai_summary` | string | Gemini |
-| `ai_category` | string | Gemini |
+| `ai_summary` | string | GROQ |
+| `ai_category` | string | GROQ |
 | `id` | uuid | Supabase |
 | `created_at` | timestamp | Supabase |
 
@@ -115,7 +115,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Self-hosting
 
-Want to run this with your own Supabase and Gemini account? Follow these steps.
+Want to run this with your own Supabase and GROQ account? Follow these steps.
 
 ### 1. Create a Supabase project
 
@@ -147,6 +147,12 @@ supabase db push
 Go to [console.groq.com](https://console.groq.com) → **API Keys** → **Create API Key** → `GROQ_API_KEY`
 
 ### 4. Configure environment variables
+
+Copy the example file and fill in your values:
+
+```bash
+cp .env.example .env.local
+```
 
 ```bash
 # .env.local
