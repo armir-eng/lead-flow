@@ -1,16 +1,16 @@
-interface CategoryStyle {
-    bg: string;
-    text: string,
-    dot: string
+interface FilterButtonStyle {
+    bg?: string;
+    text?: string,
+    dot?: string
 }
 
 export interface Category {
-    Automation: CategoryStyle;
-    Website: CategoryStyle;
-    "AI Integration": CategoryStyle;
-    SEO: CategoryStyle;
-    "Custom Software": CategoryStyle;
-    Other: CategoryStyle
+    Automation: FilterButtonStyle;
+    Website: FilterButtonStyle;
+    "AI Integration": FilterButtonStyle;
+    SEO: FilterButtonStyle;
+    "Custom Software": FilterButtonStyle;
+    Other: FilterButtonStyle
 }
 
 export const CATEGORIES: Category = {

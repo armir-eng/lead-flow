@@ -26,10 +26,15 @@ function CategoryBadge({ category }: { category: keyof Category }) {
 
 export default function Dashboard({ leads }: DashboardProps) {
     const [filter, setFilter] = useState<string>("All");
-    const [expanded, setExpanded] = useState<string|null>(null);
+    const [expanded, setExpanded] = useState<string | null>(null);
 
     const filtered = filter === "All" ? leads : leads.filter(l => l.ai_category === filter);
-    
+    const filterButtonClass = (category: "All" | keyof Category) =>
+        `px-3.25 py-1.5 rounded-full border-[1.5px] text-xs font-dm-sans font-semibold cursor-pointer transition-all ${filter === category
+            ? "border-[#1a1a2e] bg-[#1a1a2e] text-white"
+            : "border-[#e0e0e0] bg-white text-[#555]"
+        }`
+
     return (
         <div className="py-7 px-8">
             <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
@@ -42,15 +47,18 @@ export default function Dashboard({ leads }: DashboardProps) {
                     </p>
                 </div>
                 <div className="flex gap-1.5 flex-wrap">
+                    <Button
+                        onClick={() => setFilter("All")}
+                        className={filterButtonClass("All")}
+                    >
+                        All
+                    </Button>
                     {Object.keys(CATEGORIES).map(category => (
-                        <Button 
-                            key={category} 
+                        <Button
+                            key={category}
                             onClick={() => setFilter(category)}
-                            className={`px-3.25 py-1.5 rounded-full border-[1.5px] text-xs font-dm-sans font-semibold cursor-pointer transition-all ${filter === category
-                                ? "border-[#1a1a2e] bg-[#1a1a2e] text-white"
-                                : "border-[#e0e0e0] bg-white text-[#555]"
-                                }`}
-                            >
+                            className={filterButtonClass(category as keyof Category)}
+                        >
                             {category}
                         </Button>
                     ))}
