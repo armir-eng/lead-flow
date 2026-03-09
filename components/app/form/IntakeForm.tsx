@@ -10,7 +10,7 @@ import { Field, FieldLabel } from "@/components/shadcn/field";
 import { Input } from "@/components/shadcn/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn/select";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+
 
 
 export default function IntakeForm() {
@@ -26,7 +26,6 @@ export default function IntakeForm() {
         },
     })
 
-    const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [focused, setFocused] = useState<string | null>(null);
@@ -75,10 +74,6 @@ export default function IntakeForm() {
 
         setLoading(false);
         setSubmitted(true);
-
-        // Re-fetch all server components on the current page, especially updating the leads list.
-        // Practically speaking, you can see the .
-        router.refresh(); 
     };
 
     /*-------------------------- Shared classes -----------------------*/
