@@ -3,7 +3,6 @@ import { Playfair_Display, DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/app/shared/Header";
 import { supabaseAdmin } from "@/lib/supabase";
-import IntakeForm from "@/components/app/form/IntakeForm";
 import Card from "@/components/app/shared/Card";
 import { ToastContainer } from "react-toastify";
 
@@ -32,6 +31,8 @@ export const metadata: Metadata = {
   title: "LeadFlow",
   description: "An AI-powered lead intake portal that automatically categorizes and summarizes incoming client requests — surfacing them on a clean, filterable dashboard.",
 };
+
+export const dynamic = "force-dynamic";
 
 export default async function RootLayout({
   children,
