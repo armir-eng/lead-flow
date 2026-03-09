@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { InferType } from "yup";
-import { LeadSubmission } from "../../../schemas/lead";
+import { INDUSTRIES, LeadSubmission } from "@/schemas/lead";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@/components/shadcn/button";
-import { Field, FieldLabel } from "../../shadcn/field";
-import { Input } from "../../shadcn/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../shadcn/select";
+import { Field, FieldLabel } from "@/components/shadcn/field";
+import { Input } from "@/components/shadcn/input";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn/select";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
@@ -21,7 +21,7 @@ export default function IntakeForm() {
             name: "",
             email: "",
             business_name: "",
-            industry: "",
+            industry: "Healthcare",
             message: ""
         },
     })
@@ -90,21 +90,7 @@ export default function IntakeForm() {
             ? "border-[#1a1a2e] shadow-[0_0_0_3px_rgba(26,26,46,0.07)]"
             : "border-[#e0e0e0]"
         }`;
-    const labelClass = "block mb-1.5 text-[13px] font-semibold text-[#3d3d3d] tracking-[0.01em] font-dm-sans";
-    
-    
-    // Industry options list
-    const INDUSTRIES = [
-        "Healthcare",
-        "Real Estate",
-        "Legal",
-        "Finance",
-        "Professional Services",
-        "E-commerce",
-        "Education",
-        "Technology",
-        "Other"
-    ]
+    const labelClass = "block mb-1.5 text-[13px] font-semibold text-[#3d3d3d] tracking-[0.01em] font-dm-sans"; // Shared class for field labels
 
 
     // Success message on successful form submission 
@@ -212,7 +198,7 @@ export default function IntakeForm() {
                             <Field>
                                 <FieldLabel htmlFor="industry">Industry</FieldLabel>
                                 <Select value={field.value} onValueChange={field.onChange}>
-                                    <SelectTrigger>
+                                    <SelectTrigger className="cursor-pointer">
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>

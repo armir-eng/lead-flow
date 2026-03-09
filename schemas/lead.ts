@@ -1,16 +1,28 @@
 import * as yup from "yup"
 
+// Industry options list
+export const INDUSTRIES = [
+    "Healthcare",
+    "Real Estate",
+    "Legal",
+    "Finance",
+    "Professional Services",
+    "E-commerce",
+    "Education",
+    "Technology",
+    "Other"
+]
 
 export const LeadSubmission = yup.object().shape({
     name: yup.string().required(),
     email: yup.string().email().required(),
     business_name: yup.string().required(),
-    industry: yup.string().required(),
+    industry: yup.string().oneOf(INDUSTRIES).required(),
     message: yup.string().required()
 })
 
 export const GROQResponse = yup.object().shape({
-    choices: yup.array().required() 
+    choices: yup.array().required()
 }).stripUnknown() // We only need the 'choices' field
 
 export const AIResult = yup.object().shape({
