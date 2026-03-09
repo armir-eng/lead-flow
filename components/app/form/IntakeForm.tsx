@@ -10,10 +10,12 @@ import { Field, FieldLabel } from "@/components/shadcn/field";
 import { Input } from "@/components/shadcn/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn/select";
 import { toast } from "react-toastify";
-
+import { useRouter } from "next/navigation";
 
 
 export default function IntakeForm() {
+
+    const router = useRouter();
 
     const form = useForm<InferType<typeof LeadSubmission>>({
         resolver: yupResolver(LeadSubmission),
@@ -74,6 +76,7 @@ export default function IntakeForm() {
 
         setLoading(false);
         setSubmitted(true);
+        router.refresh();
     };
 
     /*-------------------------- Shared classes -----------------------*/
